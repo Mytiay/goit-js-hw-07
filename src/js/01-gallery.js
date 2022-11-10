@@ -19,3 +19,37 @@ function galleryCardMarkup({ preview, original, description }) {
       </a> 
   </div>`;
 }
+
+function onClickShowModal(e) {
+  e.preventDefault();
+
+  if (e.target.nodeName !== "IMG") return;
+
+  const gallery = basicLightbox.create(
+    `
+  <div class="modal">
+    <img
+    class="modal__image"
+    src="${e.target.dataset.source}"
+    />
+  </div>
+  `,
+    {
+      onShow: (gallery) => {
+        window.addEventListener("keydown", onEscPress);
+        gallery.element().querySelector("img").onclick = gallery.close;
+      },
+      onClose: (gallery) => {
+        window.removeEventListener("keydown", onEscPress);
+      },
+    }
+  );
+
+  function onEscPress(e) {
+    if (e.code === "Escape") {
+      gallery.close();
+    }
+  }
+
+  gallery.show();
+}
