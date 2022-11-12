@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items.js';
 
 console.log(galleryItems);
 
-const listEl = document.querySelector('gallery');
+const listEl = document.querySelector('.gallery');
 
 const listTemplate = (preview, original, description) => `
 <li>
@@ -14,12 +14,11 @@ const listTemplate = (preview, original, description) => `
 `;
 
 const render = () => {
-    const arrayFromListTemplate = galleryItems
-        .map((item) => listTemplate(item.preview, item.original, item.description)).join("");
+  const arrayFromListTemplate = galleryItems.map((item) => listTemplate(item.preview, item.original, item.description)).join("");
     
-    console.log(arrayFromListTemplate);
+  console.log(arrayFromListTemplate);
 
-    listEl.innerHTML = arrayFromListTemplate;
+  listEl.innerHTML = arrayFromListTemplate;
 };
 
 render();
